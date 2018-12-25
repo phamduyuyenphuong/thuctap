@@ -18,7 +18,7 @@ int main()
 	ngaythang x;
 	int year;
 	string st;
-
+	int a;
 	cout <<"nhap du lieu ";
 	getline(cin,st);
 	chuoi(st,x);
@@ -26,7 +26,7 @@ int main()
 		NamNhuan(year); 
 	cout<<NamNhuan(x.year)<<endl;
 	cout<<stt(x)<<endl;
-	return congNgayThang(x,a);
+	 congNgayThang(x,a);
 }
 
 void chuoi(string st,NgayThang &x) {
