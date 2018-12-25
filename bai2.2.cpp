@@ -56,7 +56,7 @@ int stt(NgayThang x)
 	for(int i =0; i< x.month; i++)
 	stt+=month[i];
 	stt += x.day;
-	if(NamNhuan==0 && x.month>2) stt+=1;
+	if(NamNhuan==0 && x.month > 2) stt+=1;
 	return stt;
 
 }
@@ -76,7 +76,6 @@ int NgayTuSTT(int stt, int year){
 					i++;
 				}	
 	
-	
 				
 	}
 	
@@ -85,6 +84,7 @@ int congNgayThang(NgayThang x, int a)// a<=365
 {
 	int kq= a + stt(x);
 	int year=x.year;
+	if(a <= 365)
 	if(kq <= 365)
 		return NgayTuSTT(kq,year);
 	else
@@ -96,18 +96,14 @@ int congNgayThang(NgayThang x, int a)// a<=365
 		else
 			return 	NgayTuSTT(kq-365,year+1);
 	// a> 365
-		int KQ = a + stt(x);	
-		NgayThang t;
-	t.year = x.year;
-	t.month = 1;
-	t.day = 0;
-	while(a > 365)
-		for(KQ; KQ >= 366; KQ=366)
-		{
-			if(NamNhuan(t) == 0)
-				KQ++;
-			t.year++; 
-		}
+	else
+		if(NamNhuan(year)==1)
+			return NgayTuSTT(kq+366,year+1);
+		else
+			return NgayTuSTT(kq+365,year+1); 	
+						
+	
+
 	
 						
 }
