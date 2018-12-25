@@ -12,13 +12,14 @@ int stt(NgayThang x);
 int month[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
 NgayThang NgayTuSTT(int stt, int year);
 NgayThang congNgayThang(NgayThang x, int a);
-
+NgayThang TruNgayThang(NgayThang x, int b);
 int main()
 {
 	ngaythang x;
 	int year;
 	string st;
 	int a;
+	int b;
 	cout <<"nhap du lieu ";
 	getline(cin,st);
 	chuoi(st,x);
@@ -28,6 +29,7 @@ int main()
 	cout<<stt(x)<<endl;
 	
 	 congNgayThang(x,a);
+	 TruNgayThang(x,b);
 }
 
 void chuoi(string st,NgayThang &x) {
@@ -85,7 +87,7 @@ NgayThang NgayTuSTT(int stt, int year){
 }
 NgayThang congNgayThang(NgayThang x, int a)// a<=365
 {
-	cout<<"nhap a";
+	cout<<"nhap a";// a la so cong
 	cin>>a;
 	int kq= a + stt(x);
 	int year=x.year;
@@ -106,11 +108,38 @@ NgayThang congNgayThang(NgayThang x, int a)// a<=365
 			return NgayTuSTT(kq+366,year+1);
 		else
 			return NgayTuSTT(kq+365,year+1); 	
-						
-	
-
-	
-						
+										
+}
+NgayThang TruNgayThang(NgayThang x, int b)
+{
+	cout<<" nhap b" ;// b là so bi tru
+	cin>> b;
+		int sttngay=0;
+		int year=x.year;	
+		//ktra nam nhuan de muon 365/366 ngay
+		if(NamNhuan(year)==1)
+			 sttngay = 366 + x.day;
+		else
+			 sttngay = 365 + x.day;
+				int kq= sttngay-b;
+		//	tinh ngay bi tru 	// b<= 365
+			if(b <= 365)
+				if(kq <= 365)
+		 			return NgayTuSTT(kq,year);
+				else
+				if(NamNhuan(year)==1)
+						if(kq == 366)
+							return NgayTuSTT(kq,year);
+						else
+							return NgayTuSTT(kq-366,year-1);
+				else
+					return 	NgayTuSTT(kq-365,year-1);
+	// b> 365
+	else
+		if(NamNhuan(year)==1)
+			return NgayTuSTT(kq-366,year-1);
+		else
+			return NgayTuSTT(kq-365,year-1); 
 }
 
 
