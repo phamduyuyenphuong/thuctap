@@ -10,8 +10,8 @@ void chuoi( string st,NgayThang &x);
 int NamNhuan(int year);
 int stt(NgayThang x);
 int month[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
-int NgayTuSTT(int stt, int year);
-int congNgayThang(NgayThang x, int a);
+NgayThang NgayTuSTT(int stt, int year);
+NgayThang congNgayThang(NgayThang x, int a);
 
 int main()
 {
@@ -26,9 +26,8 @@ int main()
 		NamNhuan(year); 
 	cout<<NamNhuan(x.year)<<endl;
 	cout<<stt(x)<<endl;
-	cout<<"nhap a";
-	cin>>a;
-	 cout<<congNgayThang(x,a);
+	
+	 congNgayThang(x,a);
 }
 
 void chuoi(string st,NgayThang &x) {
@@ -60,8 +59,8 @@ int stt(NgayThang x)
 	return stt;
 
 }
-
-int NgayTuSTT(int stt, int year){
+NgayThang NgayTuSTT(int stt, int year){
+	
 	int i=1;
 	int ngay = stt;
 	int kt = NamNhuan(year);
@@ -75,13 +74,19 @@ int NgayTuSTT(int stt, int year){
 					ngay = stt;
 					i++;
 				}	
-	
-				
+	ngaythang x;
+		x.day=ngay;
+		x.month=i;
+		x.year= year;
+		return x;	
+			
 	}
 	
 }
-int congNgayThang(NgayThang x, int a)// a<=365
+NgayThang congNgayThang(NgayThang x, int a)// a<=365
 {
+	cout<<"nhap a";
+	cin>>a;
 	int kq= a + stt(x);
 	int year=x.year;
 	if(a <= 365)
