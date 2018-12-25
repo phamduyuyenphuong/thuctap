@@ -10,6 +10,8 @@ void chuoi( string st,NgayThang &x);
 int NamNhuan(int year);
 int stt(NgayThang x);
 int month[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+NgayThang NgayTuSTT(int stt, int year);
+NgayThang congNgayThang(NgayThang x, int a)
 int main()
 {
 	ngaythang x;
@@ -53,5 +55,27 @@ int stt(NgayThang x)
 	return stt;
 
 }
+
+NgayThang NgayTuSTT(int sttn, int year){
+	
+}
+NgayThang congNgayThang(NgayThang x, int a)// x<=365
+{
+	int kq= a + stt(x);
+	int year=x.year;
+	if(kq <= 365)
+		return NgayTuSTT(kq,year);
+		else
+			if(NamNhuan(year)==1)
+				if(kq == 366)
+					return NgayTuSTT(kq,year);
+				else
+					return NgayTuSTT(kq-366,year+1);
+			else
+				return 	NgayTuSTT(kq-365,year+1);
+	else // kq > 366
+						
+}
+
 
 
