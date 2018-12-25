@@ -118,9 +118,9 @@ NgayThang TruNgayThang(NgayThang x, int b)
 		int year=x.year;	
 		//ktra nam nhuan de muon 365/366 ngay
 		if(NamNhuan(year)==1)
-			 sttngay = 366 + x.day;
+			 sttngay = 366 + stt(x);
 		else
-			 sttngay = 365 + x.day;
+			 sttngay = 365 + stt(x);
 				int kq= sttngay-b;
 		//	tinh ngay bi tru 	// b<= 365
 			if(b <= 365)
