@@ -27,9 +27,12 @@ int main()
 		NamNhuan(year); 
 	cout<<NamNhuan(x.year)<<endl;
 	cout<<stt(x)<<endl;
-	
-	 congNgayThang(x,a);
-	 TruNgayThang(x,b);
+		cout<<"nhap a";// a la so cong
+		cin>>a;
+	 cout << congNgayThang(x,a).day << "/"<<congNgayThang(x,a).month<<"/"<<congNgayThang(x,a).year;
+	 	cout<<" nhap b" ;// b là so bi tru
+		cin>> b;
+	  cout <<TruNgayThang(x,b).day<<"/"<<TruNgayThang(x,b).month<<"/"<<TruNgayThang(x,b).year;
 }
 
 void chuoi(string st,NgayThang &x) {
@@ -53,7 +56,7 @@ int NamNhuan(int year)
 }
 int stt(NgayThang x)
 {
-	int stt=0;
+	int stt = 0;
 	for(int i =0; i< x.month; i++)
 	stt+=month[i];
 	stt += x.day;
@@ -61,59 +64,60 @@ int stt(NgayThang x)
 	return stt;
 
 }
-NgayThang NgayTuSTT(int stt, int year){
-	
-	int i=1;
-	int ngay = stt;
-	int kt = NamNhuan(year);
-	while(stt > 0){
-		if((kt == 1) && (i==2))// neu nam nhuan va thang 2
-			stt = stt - 29; //stt se tru cho 29 ngay 
-		else 
-			stt = stt - month[i];// stt tru cho so ngay trong thang i
-				if(stt > 0)
+NgayThang NgayTuSTT(int stt,int year)
+{
+	int i=0;
+	int ngay= stt;
+	int kt = NamNhuan(ngay);
+	while(stt >0)
+		{
+			if((kt==1) && (i==2))// neu nam nhuan va thang 2
+				stt = stt -29;//stt se tru cho 29 ngay 
+			else
+				stt = stt - month[i];// stt tru cho so ngay trong thang i
+			if(stt > 0)
 				{
 					ngay = stt;
 					i++;
-				}	
-	ngaythang x;
-		x.day=ngay;
-		x.month=i;
-		x.year= year;
-		return x;	
-			
-	}
-	
+				}
+		}
+	NgayThang n;
+	n.day = ngay;
+	n.month = i;
+	n.year = year;
+	return n;
 }
-NgayThang congNgayThang(NgayThang x, int a)// a<=365
+NgayThang congNgayThang(NgayThang n,int x)
 {
-	cout<<"nhap a";// a la so cong
-	cin>>a;
-	int kq= a + stt(x);
-	int year=x.year;
-	if(a <= 365)
-	if(kq <= 365)
-		return NgayTuSTT(kq,year);
-	else
-		if(NamNhuan(year)==1)
-			if(kq == 366)
-				return NgayTuSTT(kq,year);
-			else
-				return NgayTuSTT(kq-366,year+1);
+	
+	int kq= x + stt(n);
+	int year=n.year;
+	if(x <= 365)
+		if(kq <= 365)
+			return NgayTuSTT(kq,year);
 		else
-			return 	NgayTuSTT(kq-365,year+1);
-	// a> 365
+			if(NamNhuan(year)==1)
+				if(kq == 366)
+					return NgayTuSTT(kq,year);
+				else
+					return NgayTuSTT(kq-366,year+1);
+			else
+				return 	NgayTuSTT(kq-365,year+1);
+	
 	else
 		if(NamNhuan(year)==1)
 			return NgayTuSTT(kq+366,year+1);
 		else
-			return NgayTuSTT(kq+365,year+1); 	
-										
+			return NgayTuSTT(kq+365,year+1);
 }
+
+
+
+
+
 NgayThang TruNgayThang(NgayThang x, int b)
 {
-	cout<<" nhap b" ;// b là so bi tru
-	cin>> b;
+
 		int sttngay=0;
 		int year=x.year;	
 		//ktra nam nhuan de muon 365/366 ngay
